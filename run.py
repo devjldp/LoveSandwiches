@@ -11,9 +11,28 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('love sandwiches')
 
-
+'''CHECKING api IS WORKING
 sales = SHEET.worksheet('sales')
 
 data = sales.get_all_values()
 
 print(data)
+
+'''
+
+# Defining function to input data
+
+def get_sales_data():
+    """
+    Get sales figures from the user
+    
+    """
+
+    print("Please enter sales data form alst market")
+    print("Data should be six numbers, separated by commas.")
+    print("Example: 10, 20, 30, 40, 50, 60\n")
+
+    data_str = input("Enter your data here: ")
+    print(f"The data provides is {data_str}")
+
+get_sales_data()
