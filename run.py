@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
+import numpy as np
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -92,6 +93,32 @@ def calculate_surplus_data(sales_row):
         superplus_data.append(int(stock)-sale)
     return superplus_data
 
+def get_last_5_entries_sales():
+    """
+    Run all program functions
+    """
+    sales = SHEET.worksheet("sales")
+    # print(sales)
+    # column =sales.
+    # print(column)
+    columns = []
+    for index in range(1,7):
+        column = sales.col_values(index)
+        columns.append(column[-5:])
+    return columns
+
+def get_average(data):
+    """
+    """
+    avg = []
+    for column in data:
+        numbers = [float(number) for number in column]
+        avg.append(np.average(numbers))
+
+    print(avg)
+
+
+
 
 def main():
     """
@@ -104,4 +131,6 @@ def main():
     new_superplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_superplus_data, 'surplus')
 print("Welcome to Love Sandwiches Data Automation")
-main()
+# main()
+sales_columns = get_last_5_entries_sales()
+pprint(sales_columns)
